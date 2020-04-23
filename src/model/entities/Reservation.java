@@ -47,7 +47,7 @@ public class Reservation {
 		return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
                               //SE FOR extends RuntimeException NÃO PRECISARIA PROPAGAR O ERRO (PODE APAGAR O throws)
-	public String updateDates(Date checkIn, Date checkOut) throws DomainException{ 
+	public void updateDates(Date checkIn, Date checkOut) throws DomainException{ 
 		                                                 //POR CAUSA DA EXCEÇÃO PERSONALIZADA DomainException TEMOS QUE PROPAGAR A EXCEÇÃO AQUI NO METODO
 		Date now = new Date();   // metodo now - data agora!
 		if(checkIn.before(now) || checkOut.before(now)){  // se checkin ou checkout forem antes do now 
@@ -56,9 +56,9 @@ public class Reservation {
 		if (!checkOut.after(checkIn)){
 			throw new DomainException("Check-out data must be after check-in date");
 		}
-			this.checkIn = checkIn;
+		this.checkIn = checkIn;
 		this.checkOut = checkOut;
-		return null; //se retornar nulo é pq não deu nenhum erro(como é um método String tem que retornar texto.
+		//se retornar nulo é pq não deu nenhum erro(como é um método String tem que retornar texto.
 	}
 
 	@Override
