@@ -42,9 +42,18 @@ public class Reservation {
 		return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 
-	public void updateDates(Date checkIn, Date checkOut) {
+	public String updateDates(Date checkIn, Date checkOut) {
+		
+		Date now = new Date();   // metodo now - data agora!
+		if(checkIn.before(now) || checkOut.before(now)){  // se checkin ou checkout forem antes do now (agora)
+			return "Reservation dates for update must be future dates";
+		}
+		if (!checkOut.after(checkIn)){
+			return "Check-out data must be after check-in date";
+		}   //se passar pelas duas logicas acima, ai sim irá atualizar as datas de checkin e checkout
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
+		return null; //se retornar nulo é pq não deu nenhum erro(como é um método String tem que retornar texto.
 	}
 
 	@Override
